@@ -25,9 +25,9 @@ public class SlugGenerator {
      * FYI: the slug will contain letters from the english alphabet only.
      */
 
-    public static byte GENERATE_ONLY_FROM_NUMBERS = 0;
-    public static byte GENERATE_ONLY_FROM_LETTERS = 1;
-    public static byte GENERATE_FROM_NUMBERS_AND_LETTERS = 2;
+    public static final byte GENERATE_ONLY_FROM_NUMBERS = 0;
+    public static final byte GENERATE_ONLY_FROM_LETTERS = 1;
+    public static final byte GENERATE_FROM_NUMBERS_AND_LETTERS = 2;
 
     private char[] numbers = "0123456789".toCharArray();
     private char[] letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
@@ -43,6 +43,7 @@ public class SlugGenerator {
 
     /**
      * Randomizing the slug based on the generation option and length.
+     * The maximum length of the slug limited to 255 character, it should cover all the needs of the user/client.
      *
      * @param option The generation modifier flag.Possible values is GENERATE_ONLY_FROM_NUMBERS,
      *               GENERATE_ONLY_FROM_LETTERS, and GENERATE_FROM_NUMBERS_AND_LETTERS.
@@ -54,9 +55,24 @@ public class SlugGenerator {
     public String generate(byte option, int length) {
         char[] slug = new char[length];
 
+        if(length>255) {
+            length = 255;
+        }
 
-
-
+        switch(option) {
+            case GENERATE_ONLY_FROM_NUMBERS :
+                slug = generateFromSource(numbers, length);
+                break;
+            case GENERATE_ONLY_FROM_LETTERS :
+                slug = generateFromSource(letters, length);
+                break;
+            case GENERATE_FROM_NUMBERS_AND_LETTERS :
+                slug = generateFromSource(numbersAndLetters, length);
+                break;
+            default :
+                slug = generateFromSource(numbersAndLetters, length);
+                break;
+        }
         return String.valueOf(slug);
     }
 
