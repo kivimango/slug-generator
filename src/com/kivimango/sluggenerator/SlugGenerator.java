@@ -34,7 +34,31 @@ public class SlugGenerator {
     private char[] numbersAndLetters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
     public static void main(String[] args) {
-
+        SlugGenerator slugGenerator = new SlugGenerator();
+        String randomSlug;
+        byte length = 7;
+        randomSlug = slugGenerator.generate(GENERATE_FROM_NUMBERS_AND_LETTERS, length);
+        System.out.println("The generated slug is : " + randomSlug);
     }
-    
+
+    /**
+     * Randomizing the slug based on the generation option and length.
+     *
+     * @param option The generation modifier flag.Possible values is GENERATE_ONLY_FROM_NUMBERS,
+     *               GENERATE_ONLY_FROM_LETTERS, and GENERATE_FROM_NUMBERS_AND_LETTERS.
+     *               The default is GENERATE_FROM_NUMBERS_AND_LETTERS.
+     * @param length The final character length of the generated slug.
+     * @return The generated slug based on the passed parameters.
+     */
+
+    public String generate(byte option, int length) {
+        char[] slug = new char[length];
+        Random randomizer = new Random();
+
+        for(byte i=0; i<length; i++) {
+            slug[i] = numbers[randomizer.nextInt(numbers.length)];
+        }
+
+        return String.valueOf(slug);
+    }
 }
