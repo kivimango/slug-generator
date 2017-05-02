@@ -53,12 +53,25 @@ public class SlugGenerator {
 
     public String generate(byte option, int length) {
         char[] slug = new char[length];
+
+
+
+
+        return String.valueOf(slug);
+    }
+
+    /**
+     * Method to avoid code duplication.
+     * The generation will happen here.
+     */
+
+    private char[] generateFromSource(char[] source, int length) {
+        char[] result = new char[length];
         Random randomizer = new Random();
 
         for(byte i=0; i<length; i++) {
-            slug[i] = numbers[randomizer.nextInt(numbers.length)];
+            result[i] = source[randomizer.nextInt(source.length)];
         }
-
-        return String.valueOf(slug);
+        return result;
     }
 }
