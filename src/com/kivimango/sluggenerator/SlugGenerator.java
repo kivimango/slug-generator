@@ -29,34 +29,33 @@ public class SlugGenerator {
     public static final byte GENERATE_ONLY_FROM_LETTERS = 1;
     public static final byte GENERATE_FROM_NUMBERS_AND_LETTERS = 2;
 
+    private final byte LENGTH_LIMIT = 127;
+
     private char[] numbers = "0123456789".toCharArray();
     private char[] letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
     private char[] numbersAndLetters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
-    public static void main(String[] args) {
-        SlugGenerator slugGenerator = new SlugGenerator();
-        String randomSlug;
-        byte length = 7;
-        randomSlug = slugGenerator.generate(GENERATE_FROM_NUMBERS_AND_LETTERS, length);
-        System.out.println("The generated slug is : " + randomSlug);
-    }
-
     /**
      * Randomizing the slug based on the generation option and length.
-     * The maximum length of the slug limited to 255 character, it should cover all the needs of the user/client.
+     * The maximum length of the slug limited to 127 character, it should cover all the needs of the user/client
+     * (if the passed length parameter is bigger than the limit, the class will silently cut the value to the limit).
      *
+     * @author       kivimango
+     * @version      1.0
+     * @since        1.0
      * @param option The generation modifier flag.Possible values is GENERATE_ONLY_FROM_NUMBERS,
      *               GENERATE_ONLY_FROM_LETTERS, and GENERATE_FROM_NUMBERS_AND_LETTERS.
      *               The default is GENERATE_FROM_NUMBERS_AND_LETTERS.
      * @param length The final character length of the generated slug.
      * @return The generated slug based on the passed parameters.
+     *
      */
 
     public String generate(byte option, int length) {
         char[] slug = new char[length];
 
-        if(length>255) {
-            length = 255;
+        if(length>LENGTH_LIMIT) {
+            length = LENGTH_LIMIT;
         }
 
         switch(option) {
@@ -79,6 +78,10 @@ public class SlugGenerator {
     /**
      * Method to avoid code duplication.
      * The generation will happen here.
+     *
+     * @author       kivimango
+     * @version      1.0
+     * @since        1.0
      */
 
     private char[] generateFromSource(char[] source, int length) {
