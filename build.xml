@@ -8,7 +8,8 @@
     <path id="classpath.base" />
 
     <path id="classpath.test">
-        <pathelement location="lib/junit-4.12.jar" />
+        <pathelement location="lib/junit-jupiter-api-5.0.0-M4.jar" />
+        <pathelement location="lib/opentest4j-1.0.0-M2.jar" />
         <pathelement location="${main.build.dir}"/>
         <path refid="classpath.base" />
     </path>
