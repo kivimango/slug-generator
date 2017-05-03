@@ -13,6 +13,8 @@ import java.util.Random;
  *  This class will generate a random, unique string from letters and numbers in 9gag-style which you can use for
  *  identify a blog post, a video, an article etc. in an URL.
  *
+ *  Usage example : generate(SlugGenerator.GENERATE_FROM_NUMBERS_AND_LETTERS, 23);
+ *
  *  @author     kivimango
  *  @link       https://github.com/kivimango/slug-generator/
  *  @version    0.1
@@ -40,34 +42,35 @@ public class SlugGenerator {
      * The maximum length of the slug limited to 127 character, it should cover all the needs of the user/client
      * (if the passed length parameter is bigger than the limit, the class will silently cut the value to the limit).
      *
-     * @author       kivimango
-     * @since        1.0
+     * The GENERATE_FROM_NUMBERS_AND_LETTERS option does not guarantee that the result will contain both numbers AND letters.
+     *
      * @param option The generation modifier flag.Possible values is GENERATE_ONLY_FROM_NUMBERS,
      *               GENERATE_ONLY_FROM_LETTERS, and GENERATE_FROM_NUMBERS_AND_LETTERS.
      *               The default is GENERATE_FROM_NUMBERS_AND_LETTERS.
      * @param length The final character length of the generated slug.
-     * @return The generated slug based on the passed parameters.
-     *
+     * @return       The generated slug based on the passed parameters.
+     * @author       kivimango
+     * @since        1.0
      */
 
     public String generate(byte option, int length) {
-        char[] slug = new char[length];
-
-        if(length>LENGTH_LIMIT) {
+        if (length > LENGTH_LIMIT) {
             length = LENGTH_LIMIT;
         }
 
-        switch(option) {
-            case GENERATE_ONLY_FROM_NUMBERS :
+        char[] slug = new char[length];
+
+        switch (option) {
+            case GENERATE_ONLY_FROM_NUMBERS:
                 slug = generateFromSource(numbers, length);
                 break;
-            case GENERATE_ONLY_FROM_LETTERS :
+            case GENERATE_ONLY_FROM_LETTERS:
                 slug = generateFromSource(letters, length);
                 break;
-            case GENERATE_FROM_NUMBERS_AND_LETTERS :
+            case GENERATE_FROM_NUMBERS_AND_LETTERS:
                 slug = generateFromSource(numbersAndLetters, length);
                 break;
-            default :
+            default:
                 slug = generateFromSource(numbersAndLetters, length);
                 break;
         }
@@ -78,15 +81,15 @@ public class SlugGenerator {
      * Method to avoid code duplication.
      * The generation will happen here.
      *
-     * @author       kivimango
-     * @since        1.0
+     * @author kivimango
+     * @since 1.0
      */
 
     private char[] generateFromSource(char[] source, int length) {
         char[] result = new char[length];
         Random randomizer = new Random();
 
-        for(byte i=0; i<length; i++) {
+        for (byte i = 0; i < length; i++) {
             result[i] = source[randomizer.nextInt(source.length)];
         }
         return result;
