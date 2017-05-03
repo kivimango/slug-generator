@@ -13,38 +13,38 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class SlugGeneratorTest {
 
-    SlugGenerator slugGenerator = new SlugGenerator();
+    private SlugGenerator slugGenerator = new SlugGenerator();
 
     @Test
-    public void TestSlugLength() {
+    void TestSlugLength() {
         int desiredLength = 7;
         String slugForBlogPost = slugGenerator.generate(SlugGenerator.GENERATE_FROM_NUMBERS_AND_LETTERS, desiredLength);
         assertEquals(slugForBlogPost.length(), desiredLength);
     }
 
     @Test
-    public void SlugLengthShouldBeCuttedToLimit() {
+    void SlugLengthShouldBeCuttedToLimit() {
         int tooLongLength = 4653;
         String slugForPicture = slugGenerator.generate(SlugGenerator.GENERATE_FROM_NUMBERS_AND_LETTERS, tooLongLength);
         assertEquals(slugForPicture.length(), SlugGenerator.LENGTH_LIMIT);
     }
 
     @Test
-    public void SlugShouldContainOnlyNumbers() {
+    void SlugShouldContainOnlyNumbers() {
         int desiredLength = 10;
         String nineGagPostSlug = slugGenerator.generate(SlugGenerator.GENERATE_ONLY_FROM_NUMBERS, desiredLength);
         assertTrue(nineGagPostSlug.matches("[0-9]+"), "The result should contain only numbers");
     }
 
     @Test
-    public void SlugShouldContainOnlyLetters() {
+    void SlugShouldContainOnlyLetters() {
         int desiredLength = 12;
         String articleSlug = slugGenerator.generate(SlugGenerator.GENERATE_ONLY_FROM_LETTERS, desiredLength);
         assertTrue(articleSlug.matches("[a-zA-Z]+"), "The result should contain only letters");
     }
 
     @Test
-    public void SlugShouldContainNumbersOrLetters() {
+    void SlugShouldContainNumbersOrLetters() {
         int desiredLength = 23;
         String webShopProductSlug = slugGenerator.generate(SlugGenerator.GENERATE_FROM_NUMBERS_AND_LETTERS, desiredLength);
         assertTrue(webShopProductSlug.matches("[0-9a-zA-Z]+"), "The result should contain only numbers and letters");
