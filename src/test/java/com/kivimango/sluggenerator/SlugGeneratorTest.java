@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  * @since   1.0
  */
 
-class SlugGeneratorTest {
+public class SlugGeneratorTest {
 
     private SlugGenerator slugGenerator = new SlugGenerator();
 
