@@ -1,6 +1,8 @@
 # slug-generator
 Generate a random, unique string from letters and numbers in 9gag-style which you can use for  identify a blog post,
 a video, an article etc. in an URL.
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
+[![Build Status](https://travis-ci.org/kivimango/slug-generator.svg?branch=master)](https://travis-ci.org/kivimango/slug-generator)
 
 ## Usage
  Create a new instance of the SlugGenerator class.
