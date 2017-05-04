@@ -26,16 +26,24 @@ public class SlugGeneratorTest {
     }
 
     @Test
-    public void SlugLengthShouldBeCuttedToLimit() {
+    public void SlugLengthShouldBeCutToMinimumLimit() {
+        int tooShortLength = 0;
+        String slugForPicture = slugGenerator.generate(SlugGenerator.GENERATE_FROM_NUMBERS_AND_LETTERS, tooShortLength);
+        assertEquals(slugForPicture.length(), SlugGenerator.LENGTH_MIN_LIMIT);
+    }
+
+    @Test
+    public void SlugLengthShouldBeCutToMaximumLimit() {
         int tooLongLength = 4653;
         String slugForPicture = slugGenerator.generate(SlugGenerator.GENERATE_FROM_NUMBERS_AND_LETTERS, tooLongLength);
-        assertEquals(slugForPicture.length(), SlugGenerator.LENGTH_LIMIT);
+        assertEquals(slugForPicture.length(), SlugGenerator.LENGTH_MAX_LIMIT);
     }
 
     @Test
     public void SlugShouldContainOnlyNumbers() {
         int desiredLength = 10;
         String nineGagPostSlug = slugGenerator.generate(SlugGenerator.GENERATE_ONLY_FROM_NUMBERS, desiredLength);
+        assertEquals(desiredLength, nineGagPostSlug.length());
         assertEquals(true, nineGagPostSlug.matches("[0-9]+"));
     }
 
@@ -43,6 +51,7 @@ public class SlugGeneratorTest {
     public void SlugShouldContainOnlyLetters() {
         int desiredLength = 12;
         String articleSlug = slugGenerator.generate(SlugGenerator.GENERATE_ONLY_FROM_LETTERS, desiredLength);
+        assertEquals(desiredLength, articleSlug.length());
         assertEquals(true, articleSlug.matches("[a-zA-Z]+"));
     }
 
@@ -50,6 +59,7 @@ public class SlugGeneratorTest {
     public void SlugShouldContainNumbersOrLetters() {
         int desiredLength = 23;
         String webShopProductSlug = slugGenerator.generate(SlugGenerator.GENERATE_FROM_NUMBERS_AND_LETTERS, desiredLength);
+        assertEquals(desiredLength, webShopProductSlug.length());
         assertEquals(true, webShopProductSlug.matches("[0-9a-zA-Z]+"));
     }
 }

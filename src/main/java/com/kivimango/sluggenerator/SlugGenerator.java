@@ -31,7 +31,8 @@ public class SlugGenerator {
     public static final byte GENERATE_ONLY_FROM_LETTERS = 1;
     public static final byte GENERATE_FROM_NUMBERS_AND_LETTERS = 2;
 
-    static final byte LENGTH_LIMIT = 127;
+    static final byte LENGTH_MIN_LIMIT = 3;
+    static final byte LENGTH_MAX_LIMIT = 127;
 
     private final char[] numbers = "0123456789".toCharArray();
     private final char[] letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
@@ -40,7 +41,7 @@ public class SlugGenerator {
     /**
      * Randomizing the slug based on the generation option and length.
      * The maximum length of the slug limited to 127 character, it should cover all the needs of the user/client
-     * (if the passed length parameter is bigger than the limit, the class will silently cut the value to the limit).
+     * (if the passed length parameter is out of the limits, the class will silently cut the value to the limit).
      *
      * The GENERATE_FROM_NUMBERS_AND_LETTERS option does not guarantee that the result will contain both numbers AND letters.
      *
@@ -54,10 +55,7 @@ public class SlugGenerator {
      */
 
     public String generate(byte option, int length) {
-        if (length > LENGTH_LIMIT) {
-            length = LENGTH_LIMIT;
-        }
-
+        length = checkAndSetLength(length);
         char[] slug = new char[length];
 
         switch (option) {
@@ -93,5 +91,14 @@ public class SlugGenerator {
             result[i] = source[randomizer.nextInt(source.length)];
         }
         return result;
+    }
+
+    private int checkAndSetLength(int lengthToCheck) {
+        if (lengthToCheck < LENGTH_MIN_LIMIT) {
+            lengthToCheck = LENGTH_MIN_LIMIT;
+        } else if (lengthToCheck > LENGTH_MAX_LIMIT) {
+            lengthToCheck = LENGTH_MAX_LIMIT;
+        }
+        return lengthToCheck;
     }
 }
