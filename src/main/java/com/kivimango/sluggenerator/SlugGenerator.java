@@ -13,30 +13,34 @@ import java.util.Random;
  *  This class will generate a random, unique string from letters and numbers in 9gag-style which you can use for
  *  identify a blog post, a video, an article etc. in an URL.
  *
- *  Usage example : generate(SlugGenerator.GENERATE_FROM_NUMBERS_AND_LETTERS, 23);
+ *  Usage example :
+ *  Call the static method generate() of the class :
+ *
+ *  <code>SlugGenerator.generate(SlugGenerator.Options.GENERATE_FROM_NUMBERS_AND_LETTERS, 23);</code>
  *
  *  @author     kivimango
  *  @link       https://github.com/kivimango/slug-generator/
- *  @version    0.1
+ *  @version    1.1
  */
 
 public class SlugGenerator {
 
     /**
-     * Generation options.
-     * FYI: the slug will contain letters from the english alphabet only.
+     * The generated slug will contain letters from the english alphabet only.
      */
 
-    public static final byte GENERATE_ONLY_FROM_NUMBERS = 0;
-    public static final byte GENERATE_ONLY_FROM_LETTERS = 1;
-    public static final byte GENERATE_FROM_NUMBERS_AND_LETTERS = 2;
+    public enum Options {
+        GENERATE_ONLY_FROM_NUMBERS,
+        GENERATE_ONLY_FROM_LETTERS,
+        GENERATE_FROM_NUMBERS_AND_LETTERS
+    }
 
     static final byte LENGTH_MIN_LIMIT = 3;
     static final byte LENGTH_MAX_LIMIT = 127;
 
-    private final char[] numbers = "0123456789".toCharArray();
-    private final char[] letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
-    private final char[] numbersAndLetters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+    private static final char[] numbers = "0123456789".toCharArray();
+    private static final char[] letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+    private static final char[] numbersAndLetters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
 
     /**
      * Randomizing the slug based on the generation option and length.
@@ -54,9 +58,9 @@ public class SlugGenerator {
      * @since        1.0
      */
 
-    public String generate(byte option, int length) {
+    public static String generate(Options option, int length) {
         length = checkAndSetLength(length);
-        char[] slug = new char[length];
+        char[] slug;
 
         switch (option) {
             case GENERATE_ONLY_FROM_NUMBERS:
@@ -83,7 +87,7 @@ public class SlugGenerator {
      * @since 1.0
      */
 
-    private char[] generateFromSource(char[] source, int length) {
+    private static char[] generateFromSource(char[] source, int length) {
         char[] result = new char[length];
         Random randomizer = new Random();
 
@@ -93,7 +97,7 @@ public class SlugGenerator {
         return result;
     }
 
-    private int checkAndSetLength(int lengthToCheck) {
+    private static int checkAndSetLength(int lengthToCheck) {
         if (lengthToCheck < LENGTH_MIN_LIMIT) {
             lengthToCheck = LENGTH_MIN_LIMIT;
         } else if (lengthToCheck > LENGTH_MAX_LIMIT) {
@@ -102,3 +106,4 @@ public class SlugGenerator {
         return lengthToCheck;
     }
 }
+
