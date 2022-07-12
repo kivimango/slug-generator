@@ -2,6 +2,7 @@ package com.kivimango.sluggenerator;
 
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Since the generated results are randomized, we cant really test out, except the generation options.
@@ -39,7 +40,7 @@ public class SlugGeneratorTest {
         int desiredLength = 10;
         String nineGagPostSlug = SlugGenerator.generate(SlugGenerator.Options.GENERATE_ONLY_FROM_NUMBERS, desiredLength);
         assertEquals(desiredLength, nineGagPostSlug.length());
-        assertEquals(true, nineGagPostSlug.matches("[0-9]+"));
+        assertTrue(nineGagPostSlug.matches("[0-9]+"));
     }
 
     @Test
@@ -47,7 +48,7 @@ public class SlugGeneratorTest {
         int desiredLength = 12;
         String articleSlug = SlugGenerator.generate(SlugGenerator.Options.GENERATE_ONLY_FROM_LETTERS, desiredLength);
         assertEquals(desiredLength, articleSlug.length());
-        assertEquals(true, articleSlug.matches("[a-zA-Z]+"));
+        assertTrue(articleSlug.matches("[a-zA-Z]+"));
     }
 
     @Test
@@ -55,6 +56,6 @@ public class SlugGeneratorTest {
         int desiredLength = 23;
         String webShopProductSlug = SlugGenerator.generate(SlugGenerator.Options.GENERATE_FROM_NUMBERS_AND_LETTERS, desiredLength);
         assertEquals(desiredLength, webShopProductSlug.length());
-        assertEquals(true, webShopProductSlug.matches("^[0-9a-zA-Z]*$"));
+        assertTrue(webShopProductSlug.matches("^[0-9a-zA-Z]*$"));
     }
 }
