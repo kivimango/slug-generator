@@ -11,7 +11,7 @@ import java.util.Random;
  *         \/           /_____/         \/     \/     \/     \/           \/
  *
  *  This class will generate a random, unique string from letters and numbers in 9gag-style which you can use for
- *  identify a blog post, a video, an article etc. in an URL.
+ *  identify a blog post, a video, an article etc. in a URL.
  *
  *  Usage example :
  *  Call the static method generate() of the class :
@@ -68,9 +68,6 @@ public class SlugGenerator {
                 break;
             case GENERATE_ONLY_FROM_LETTERS:
                 slug = generateFromSource(letters, length);
-                break;
-            case GENERATE_FROM_NUMBERS_AND_LETTERS:
-                slug = generateFromSource(numbersAndLetters, length);
                 break;
             default:
                 slug = generateFromSource(numbersAndLetters, length);
