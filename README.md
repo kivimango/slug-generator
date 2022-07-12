@@ -27,5 +27,5 @@ Call the static method **generate()** of the class with the following parameters
 * If the length is bigger than the maximum length limit, the class will silently cut to the maximum limit.
 
 ### Reporting bugs
-Please use the github [Issue Tracker](https://github.com/kivimango/slug-generator/issues) to report errors, bugs, 
+Please use the GitHub [Issue Tracker](https://github.com/kivimango/slug-generator/issues) to report errors, bugs, 
 unexpected behaviors of the program.You can also use the Issues to send feature requests, improvements.
